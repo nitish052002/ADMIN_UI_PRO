@@ -5,7 +5,7 @@
 
 # TECHNOLOGIES USED
 
-1. Reac
+1. React
 2. HTML
 2. Css
 3. Javascript
