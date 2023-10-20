@@ -1,0 +1,16 @@
+.Icon{
+  background-color: transparent;
+  border: none;
+}
+.Icon:hover svg,.Icon:hover {
+  cursor: pointer;
+  color: var(--color-primary);
+  transition: color 0.2s ease-in-out;
+}
+
+ 
+@media screen and (max-width: 600px) { 
+  .Icon {
+    padding-top: 0.5rem;
+  }
+}

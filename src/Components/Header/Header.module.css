@@ -1,0 +1,135 @@
+/* Edit styles for header part */
+.addUser,
+.deleteAllUser {
+  text-wrap: nowrap;
+  color: #f1f1f1;
+  border-radius: 0.5rem;
+  border: none;
+  padding: 0.9rem 1.5rem;
+  font-size: 1rem;
+  margin-left: 0.9rem;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.addUser {
+  background-color: #319fa9;
+}
+
+.addUser:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: var(--color-primary-glow);
+}
+.deleteAllUser {
+  background-color: var(--color-red);
+}
+.deleteAllUser:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: var(--color-red-glow);
+  cursor: pointer;
+}
+
+header {
+  border-radius: 0.5rem;
+  color: white;
+  padding: 5px 0 8px 0;
+}
+
+.manage {
+  font-weight: 900;
+  color: black;
+  background-color: #319fa9;
+  color: white;
+  border-radius: 6px;
+  display: block;
+  padding: 5px 29px 5px 20px;
+}
+ 
+
+.searchForm {
+  display: flex;
+  align-items: center;
+}
+
+.userSearch {
+  padding: 0px 0px 0px 40px;
+  box-sizing: border-box;
+  background-color: white;
+  background-image: url("../../Assets/searchicon.png");
+  background-position: 10px 8px;
+  background-repeat: no-repeat;
+  transition: all 0.2s ease-in-out;
+  border: 2px solid #ccc;
+  border-radius: 0.4rem;
+  outline: none;
+  height: 40px;
+}
+
+.userSearch:focus {
+  border: 2px solid #47d4ec;
+}
+
+@media screen and (max-width: 890px) {
+  .userSearch {
+    padding: 12px 20px 12px 40px;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 16px;
+    background-color: white;
+    background-image: url("../../Assets/searchicon.png");
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid #ccc;
+    border-radius: 0.4rem;
+    outline: none;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .search-form {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}
+
+/* Extra small devices (phones, 600px and down) */
+
+@media screen and (min-width: 600px) {
+  .headerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+  }
+  .userSearch {
+    width: 260px;
+  }
+  .userSearch:focus {
+    width: 270px;
+    border: 2px solid #47d4ec;
+  }
+
+  .search-form {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .body {
+    font-size: 14px;
+    width: 550px;
+  }
+  body {
+    padding: 0 0 0 0;
+  }
+
+  .logo img {
+    width: 40px;
+  }
+  header {
+    margin-bottom: 0;
+  }
+}

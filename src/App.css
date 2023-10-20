@@ -1,38 +1,59 @@
-.App {
-  text-align: center;
+:root {
+  --color-primary: #319fa9;
+  --color-primary-glow: #00b3c3;
+  --color-red: #f53f3fed;
+  --color-red-glow: #ff0000ed;
+  --color-grey : #8996b1;
+  --color-tertiary : #e9f5f7;
+  --color-member-badge:teal;
+  --color-admin-badge:rgba(193, 16, 16, 0.773);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+* {
+  margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+  font-size: 14px;
+}
+
+body {
+  overflow-x: hidden;
+  font-family: "Poppins", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.app {
+  margin: 0 0 1rem 0;
+}
+
+.app.active {
+  filter: blur(20px);
+}
+
+button {
+  cursor: pointer;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .app {
+    font-size: 11px;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .app {
+    margin: 0rem 10rem 1rem 10rem;
   }
 }

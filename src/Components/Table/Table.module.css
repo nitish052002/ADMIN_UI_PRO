@@ -1,0 +1,12 @@
+table {
+  border-radius: 0.4rem;
+  border: 2px solid #ccc;
+  border-collapse: collapse;
+  text-align: center;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  margin: 0 0 20px 0;
+  width:-webkit-fill-available;
+}
+ 
