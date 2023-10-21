@@ -11,14 +11,7 @@ function App() {
   const [debounceTimeout, setDebounceTimeout] = useState();
   const [deleteAbleData, setDeletAbleData] = useState([]);
   const [filteredData, setFiteredData] = useState([]);
-  const [newUser, setNewUser] = useState({
-    id: "",
-    name: "",
-    email: "",
-    role: "",
-  });
   const [checkedAll, setCheckedAll] = useState(false);
-  const [isBlurActive, setBlurActive] = useState(false);
 
   let usersPerPage = 10;
   let numOfPage = Math.ceil(userData.length / usersPerPage);
@@ -76,9 +69,10 @@ function App() {
   }, []);
 
   /*
-      To update user information form the list
+  
+  To update user information form the list
       
-      @oaram {number}  id
+  @oaram {number}  id
   @oaram {{preventDeafult : function()}}  event
   @oaram {object}  user - Data for updating existing user in the list
   @param {string} name  - name of the user
@@ -130,9 +124,6 @@ function App() {
   */
 
   const onSelectAll = () => {
-    setCheckedAll(true);
-    setCheckedAll(!checkedAll);
-
     let data = userData.map((user) => {
       return {
         ...user,
@@ -144,6 +135,8 @@ function App() {
             : !user.isChecked,
       };
     });
+
+    setCheckedAll(!checkedAll);
     setUserData(data);
     setDeletAbleData(dataPerPage);
 
@@ -173,8 +166,10 @@ function App() {
     * @param {number} id - id of the that user
      */
   const deleteHandler = (id) => {
-    const deleteUser = userData.filter((user) => user.id !== id);
+    const deleteUser = filteredData.filter((user) => user.id !== id);
     setUserData(deleteUser);
+    setFiteredData(deleteUser);
+    console.log(deleteUser);
   };
 
   /*
@@ -193,21 +188,17 @@ function App() {
 
   //  Function to go to previous page
   function prevPage() {
-    console.log("dataperpage", dataPerPage);
-    console.log("delet", deleteAbleData);
     currentPage !== 1 && setCurrentPage(currentPage - 1);
   }
 
-  
-  
-  //  updating deletable data when user will switch to another page  
+  //  updating deletable data when user will switch to another page
   useEffect(() => {
     if (checkedAll) {
       setDeletAbleData(dataPerPage);
     }
   }, [currentPage]);
-  
-  //  updating deletable data when userData will Be Update  
+
+  //  updating deletable data when userData will Be Update
   useEffect(() => {
     if (checkedAll) {
       setDeletAbleData(dataPerPage);
@@ -215,32 +206,30 @@ function App() {
   }, [userData]);
 
   return (
-    <>
-      <div className={isBlurActive ? "app active" : "app"}>
-        <Header
-          searchHandler={debounceSearch}
-          deleteAllSelectedUsers={deleteAllSelectedUsers}
-          isDisable={deleteAbleData == [] ? true : false}
+    <div className="app">
+      <Header
+        searchHandler={debounceSearch}
+        deleteAllSelectedUsers={deleteAllSelectedUsers}
+        isDisable={deleteAbleData == [] ? true : false}
+      />
+      <main>
+        <Table
+          deleteHandler={deleteHandler}
+          userData={dataPerPage}
+          onSelectAll={onSelectAll}
+          updateHandler={updateHandler}
+          singleCHeched={singleCHeched}
+          checkedAll={checkedAll}
         />
-        <main>
-          <Table
-            deleteHandler={deleteHandler}
-            userData={dataPerPage}
-            onSelectAll={onSelectAll}
-            updateHandler={updateHandler}
-            singleCHeched={singleCHeched}
-            checkedAll={checkedAll}
-          />
-          <Pagination
-            totalNoOfPages={totalNoOfPages}
-            updatePageNmmber={updatePageNmmber}
-            currentPage={currentPage}
-            prevPage={prevPage}
-            nextPage={nextPage}
-          />
-        </main>
-      </div>
-    </>
+        <Pagination
+          totalNoOfPages={totalNoOfPages}
+          updatePageNmmber={updatePageNmmber}
+          currentPage={currentPage}
+          prevPage={prevPage}
+          nextPage={nextPage}
+        />
+      </main>
+    </div>
   );
 }
 

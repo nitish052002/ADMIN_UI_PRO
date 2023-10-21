@@ -19,7 +19,7 @@ input[type="checkbox"]:checked:after {
   content: "";
   display: block;
   width: 5px;
-  height: 10px;   
+  height: 10px;
   border: solid var(--color-primary);
   border-width: 0 2px 2px 0;
   -webkit-transform: rotate(45deg);
@@ -46,10 +46,15 @@ thead tr {
 
 tr {
   border-bottom: 2px solid #ccc;
+  transition: all 0.2s ease-in-out;
 }
 
-tr:nth-child(even) {
-  background-color: white;
+tbody tr:hover {
+  background-color: var(--color-row);
+  cursor: pointer;
+}
+.selected {
+  background-color: var(--color-row);
 }
 
 /* required css to make rounded table (below) */
@@ -69,11 +74,11 @@ tr:last-child td:last-child {
   border-bottom-right-radius: 10px;
 }
 
-tr:last-child  td{
+tr:last-child td {
   margin-bottom: 5px;
 }
 
-.email { 
+.email {
   color: #8996b1;
 }
 
@@ -100,9 +105,8 @@ img {
 
 .inputField:focus {
   border: 1px solid var(--color-primary);
-  padding: 6px 5px ;
+  padding: 6px 5px;
 }
-
 
 @media screen and (max-width: 600px) {
   .content {
@@ -127,6 +131,6 @@ img {
   }
 
   img {
-    width: 30px;   
+    width: 30px;
   }
 }

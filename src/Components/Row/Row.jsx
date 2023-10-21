@@ -12,7 +12,8 @@ function Row({
   userList,
   singleCHeched,
 }) {
-  const { id, name, email, role, isChecked } = userData;
+  const { id, name, email, role, isChecked } = userData; //destructuring userData
+
   const [editableData, setEditableData] = useState(null);
   const [updatedData, setUpdatedData] = useState({
     id: id,
@@ -74,7 +75,13 @@ function Row({
   }, [editableData]);
 
   return (
-    <tr key={id}>
+    <tr
+      key={id}
+      onClick={(event) => {
+        singleCHeched(id, userData);
+      }}
+      className={isChecked ? styles.selected : ""}
+    >
       <td>
         <input
           type="checkbox"
