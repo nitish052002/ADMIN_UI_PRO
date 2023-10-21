@@ -88,7 +88,7 @@ function Row({
       <td className={editableData ? null : styles.avatarContainer}>
         {editableData ? (
           <input
-            placeholder="Eame"
+            placeholder="Name"
             type="text"
             name="name"
             value={updatedData.name}
