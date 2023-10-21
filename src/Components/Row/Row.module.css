@@ -49,7 +49,7 @@ tr {
 }
 
 tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: white;
 }
 
 /* required css to make rounded table (below) */
@@ -73,9 +73,7 @@ tr:last-child  td{
   margin-bottom: 5px;
 }
 
-.email {
-  font-style: italic;
-  font-weight: 700;
+.email { 
   color: #8996b1;
 }
 

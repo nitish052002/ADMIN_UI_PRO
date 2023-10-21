@@ -1,4 +1,3 @@
-/* Edit styles for header part */
 .addUser,
 .deleteAllUser {
   text-wrap: nowrap;
@@ -43,7 +42,6 @@ header {
   display: block;
   padding: 5px 29px 5px 20px;
 }
- 
 
 .searchForm {
   display: flex;
@@ -57,7 +55,7 @@ header {
   background-image: url("../../Assets/searchicon.png");
   background-position: 10px 8px;
   background-repeat: no-repeat;
-  transition: all 0.2s ease-in-out;
+  transition: width 0.3s ease-in-out;
   border: 2px solid #ccc;
   border-radius: 0.4rem;
   outline: none;
@@ -131,5 +129,17 @@ header {
   }
   header {
     margin-bottom: 0;
+    padding: 5px 6px 8px 6px;
+  }
+  .userSearch {
+    width: 0;
+    padding: 12px 1px 12px 40px;
+    transition: width 0.3s ease-in-out;
+  }
+
+  .userSearch:hover {
+    font-size: 14px;
+    width: 300px;
+    padding: 12px 5px 12px 40px;
   }
 }

@@ -1,10 +1,10 @@
 import Cancel from "../Icons/Cancel/Cancel";
 import Delete from "../Icons/Delete/Delete";
 import Edit from "../Icons/Edit/Edit";
-import Save from "../Icons/Save/Save"; 
+import Save from "../Icons/Save/Save";
 import styles from "./Row.module.css";
 import { useEffect, useState } from "react";
- 
+
 function Row({
   updateHandler,
   deleteHandler,
@@ -22,8 +22,8 @@ function Row({
   });
 
   /*
-   * function to update input field when user will click on edit button   
-   * @param{{target : {name : string , value : string}}} event   
+   * function to update input field when user will click on edit button
+   * @param{{target : {name : string , value : string}}} event
    */
 
   const inputChangeHandler = (event) => {
@@ -31,20 +31,19 @@ function Row({
       ...updatedData,
       [event.target.name]: event.target.value,
     });
-    console.log(updatedData)
   };
 
   /*
-  * function to change the user color as per the role
-  * @param (string) role --  role of the user (Admin or )
-  * 
+   * function to change the user color as per the role
+   * @param (string) role --  role of the user (Admin or )
+   *
    */
 
   let color;
   const badgeColor = (role) => {
-    if (role.toLowerCase()  === "member") {
+    if (role.toLowerCase() === "member") {
       color = "teal";
-    } else if (role.toLowerCase()  === "admin") {
+    } else if (role.toLowerCase() === "admin") {
       color = "hsla(0, 85%, 41%, 0.774)";
     } else {
       color = "#2569c3";
@@ -61,7 +60,6 @@ function Row({
   const cancelHandler = () => {
     setEditableData(null);
   };
-
 
   //  function to update the user information
   const onClickSaveIcon = (event) => {
@@ -80,7 +78,7 @@ function Row({
       <td>
         <input
           type="checkbox"
-          name={name}      
+          name={name}
           checked={isChecked ? true : false}
           onChange={(event) => {
             singleCHeched(id, userData);

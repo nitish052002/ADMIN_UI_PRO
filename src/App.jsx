@@ -1,12 +1,11 @@
 import "./App.css";
 import Header from "./Components/Header/Header";
 import Pagination from "./Components/Pagination/Pagination";
-import AddNewUserForm from "./Components/AddNewUserForm/AddNewUserForm";
 import Table from "./Components/Table/Table";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-function App() { 
+function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [userData, setUserData] = useState([]);
   const [debounceTimeout, setDebounceTimeout] = useState();
@@ -21,7 +20,7 @@ function App() {
   const [checkedAll, setCheckedAll] = useState(false);
   const [isBlurActive, setBlurActive] = useState(false);
 
- let usersPerPage = 10
+  let usersPerPage = 10;
   let numOfPage = Math.ceil(userData.length / usersPerPage);
   let totalNoOfPages = Array.from([...Array(numOfPage + 1)].keys()).slice(1);
   let lastIndex = usersPerPage * currentPage;
@@ -41,28 +40,6 @@ function App() {
     }
   };
 
-  /* 
-  
-  * function to update newUser object while filling input field for  new user using new user form
-  @param {{  target : {value : string . name: string}  }} event
-  
-  */
-
-  const inputChangeHandler = (event) => {
-    setNewUser({
-      ...newUser,
-      id: (userData.length + 1).toString(),
-      [event.target.name]: event.target.value,
-    });
-  };
-
-  /*
-  
-  * @param {String}  value
-  Taking user input from search  
-  
-  */
-
   let performSearch = (value) => {
     let filterData = filteredData.filter(
       ({ name, role, email }) =>
@@ -71,36 +48,32 @@ function App() {
         email.includes(value)
     );
 
-    console.log(userData);
     setUserData(filterData);
     setCurrentPage(1);
     return null;
   };
 
+  /*
+  Debounce = This function ise to be called wheneven user types in the search field
+
+  * @param{{target : {value : string}}}  event
+  * JS event object emitted from the search input field
+  
+  */
+
+  const debounceSearch = (event) => {
+    if (debounceTimeout) {
+      clearTimeout(debounceTimeout);
+    }
+    let timer = setTimeout(() => {
+      performSearch(event.target.value.toLowerCase().trim());
+    }, 800);
+    setDebounceTimeout(timer);
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
-
-  /* 
-      * 
-      To add new user in list of the table
-      
-      @param {{  preventDefault : function()}} event
-      
-      */
-
-  const addNewUserHandler = (event) => {
-    event.preventDefault();
-    setUserData([...userData, newUser]);
-    setFiteredData([...filteredData, newUser]);
-    setBlurActive(!isBlurActive);
-    setNewUser({
-      id: "",
-      name: "",
-      email: "",
-      role: "",
-    });
-  };
 
   /*
       To update user information form the list
@@ -120,6 +93,7 @@ function App() {
     const updatedUserData = [...userData];
     updatedUserData.splice(index, 1, user);
     setUserData(updatedUserData);
+    setFiteredData(updatedUserData);
   };
 
   /*
@@ -149,7 +123,7 @@ function App() {
   };
 
   let isAllChecked = userData.every((user) => user.isChecked === true);
-  let isFewChecked = userData.some((user) => user.isChecked ===true);
+  let isFewChecked = userData.some((user) => user.isChecked === true);
 
   /*
   Function to select all or deselect  all the users on the currentpage   
@@ -210,55 +184,35 @@ function App() {
 
   function updatePageNmmber(pageNum) {
     setCurrentPage(pageNum);
-    
   }
 
   //  Function to go to next page
   function nextPage() {
-    currentPage !== numOfPage && setCurrentPage(currentPage + 1);    
+    currentPage !== numOfPage && setCurrentPage(currentPage + 1);
   }
 
   //  Function to go to previous page
   function prevPage() {
+    console.log("dataperpage", dataPerPage);
+    console.log("delet", deleteAbleData);
     currentPage !== 1 && setCurrentPage(currentPage - 1);
-      
-       
   }
 
-  /*
-  Debounce = This function ise to be called wheneven user types in the search field
-
-  * @param{{target : {value : string}}}  event
-  * JS event object emitted from the search input field
   
-  */
-
-  const debounceSearch = (event) => {
-    if (debounceTimeout) {
-      clearTimeout(debounceTimeout);
-    }
-    let timer = setTimeout(() => {
-      performSearch(event.target.value.toLowerCase().trim());
-    }, 800);
-    setDebounceTimeout(timer);
-  };
-
-  /*
-
-  * To hide or unhide the addNewUserForm  whenever we click on AddUser button to add new member in the list
-  * @param{{preventDefault : function()}}  event  
-
-  */
-  const displayForm = (event) => {
-    event.preventDefault();
-    setBlurActive(!isBlurActive);
-  };
-
+  
+  //  updating deletable data when user will switch to another page  
   useEffect(() => {
     if (checkedAll) {
       setDeletAbleData(dataPerPage);
     }
   }, [currentPage]);
+  
+  //  updating deletable data when userData will Be Update  
+  useEffect(() => {
+    if (checkedAll) {
+      setDeletAbleData(dataPerPage);
+    }
+  }, [userData]);
 
   return (
     <>
@@ -266,7 +220,7 @@ function App() {
         <Header
           searchHandler={debounceSearch}
           deleteAllSelectedUsers={deleteAllSelectedUsers}
-          displayForm={displayForm}
+          isDisable={deleteAbleData == [] ? true : false}
         />
         <main>
           <Table
@@ -286,14 +240,6 @@ function App() {
           />
         </main>
       </div>
-
-      <AddNewUserForm
-        newUser={newUser}
-        addNewUserHandler={addNewUserHandler}
-        inputChangeHandler={inputChangeHandler}
-        displayForm={displayForm}
-        isBlurActive={isBlurActive}
-      />
     </>
   );
 }
