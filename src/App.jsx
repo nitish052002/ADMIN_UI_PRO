@@ -66,6 +66,7 @@ function App() {
 
   useEffect(() => {
     fetchData();
+    setCheckedAll(false);
   }, []);
 
   /*
@@ -162,20 +163,20 @@ function App() {
   };
 
   /*
-     function to delete the user from the list
+    function to delete the user from the list
     * @param {number} id - id of the that user
-     */
+    */
   const deleteHandler = (id) => {
     const deleteUser = filteredData.filter((user) => user.id !== id);
     setUserData(deleteUser);
     setFiteredData(deleteUser);
-    console.log(deleteUser);
+    // console.log(deleteUser);
   };
 
   /*
     function to update the current page number
     * @param {number}  pageNum - current page number   
- */
+    */
 
   function updatePageNmmber(pageNum) {
     setCurrentPage(pageNum);
@@ -203,6 +204,9 @@ function App() {
     if (checkedAll) {
       setDeletAbleData(dataPerPage);
     }
+    if (userData.length === 0) {
+      setCheckedAll(false);
+    }
   }, [userData]);
 
   return (
@@ -210,7 +214,7 @@ function App() {
       <Header
         searchHandler={debounceSearch}
         deleteAllSelectedUsers={deleteAllSelectedUsers}
-        isDisable={deleteAbleData == [] ? true : false}
+        isDisable={deleteAbleData.length === 0 ? true : false}
       />
       <main>
         <Table

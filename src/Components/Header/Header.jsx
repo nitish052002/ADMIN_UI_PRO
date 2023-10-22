@@ -13,9 +13,10 @@ function Header({ value,isDisable,searchHandler, deleteAllSelectedUsers }) {
         />
 
         <button   
-              
+          disabled={isDisable}    
           type="button"
           className={styles.deleteAllUser}
+          style={{backgroundColor: `${isDisable ? "var(--color-red)": "var(--color-red-glow)"}`}}
           onClick={deleteAllSelectedUsers}
           value="Delete All"
         >
