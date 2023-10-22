@@ -28,6 +28,7 @@ function Row({
    */
 
   const inputChangeHandler = (event) => {
+    event.stopPropagation();
     setUpdatedData({
       ...updatedData,
       [event.target.name]: event.target.value,
@@ -52,19 +53,22 @@ function Row({
   };
   badgeColor(role);
 
-  const editHandler = () => {
+  const editHandler = (event) => {
+    event.stopPropagation();
     let data = userList.find((user) => user.id === id);
     setEditableData(data);
   };
 
   //  function to cancel the edit or updating the user information
-  const cancelHandler = () => {
+  const cancelHandler = (event) => {
+    event.stopPropagation();
     setEditableData(null);
   };
 
   //  function to update the user information
   const onClickSaveIcon = (event) => {
-    updateHandler(id, event, updatedData);
+    event.stopPropagation()
+    updateHandler(id, updatedData);
     setEditableData(null);
   };
 

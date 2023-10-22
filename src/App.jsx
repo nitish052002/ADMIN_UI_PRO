@@ -82,8 +82,7 @@ function App() {
 
 
   */
-  const updateHandler = (id, event, user) => {
-    event.preventDefault();
+  const updateHandler = (id, user) => {     
     const index = userData.findIndex((user) => user.id === id);
     const updatedUserData = [...userData];
     updatedUserData.splice(index, 1, user);
@@ -166,7 +165,8 @@ function App() {
     function to delete the user from the list
     * @param {number} id - id of the that user
     */
-  const deleteHandler = (id) => {
+  const deleteHandler = (id,event) => {
+    event.stopPropagation()
     const deleteUser = filteredData.filter((user) => user.id !== id);
     setUserData(deleteUser);
     setFiteredData(deleteUser);

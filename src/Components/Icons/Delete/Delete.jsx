@@ -3,8 +3,8 @@ function Delete({ deleteHandler, id }) {
   return (
     <>
       <button
-        onClick={() => {
-          deleteHandler(id);
+        onClick={(event) => {
+          deleteHandler(id,event);
         }}
         className={styles.Icon}
       >
