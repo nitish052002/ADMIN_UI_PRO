@@ -13,7 +13,6 @@ function Row({
   singleCHeched,
 }) {
   const { id, name, email, role, isChecked } = userData; //destructuring userData
-
   const [editableData, setEditableData] = useState(null);
   const [updatedData, setUpdatedData] = useState({
     id: id,
@@ -27,7 +26,7 @@ function Row({
    * @param{{target : {name : string , value : string}}} event
    */
 
-  const inputChangeHandler = (event) => {
+  const inputChangeHandler = (event) => {   
     event.stopPropagation();
     setUpdatedData({
       ...updatedData,
@@ -67,9 +66,19 @@ function Row({
 
   //  function to update the user information
   const onClickSaveIcon = (event) => {
-    event.stopPropagation()
-    updateHandler(id, updatedData);
-    setEditableData(null);
+    let isEmpty = false;
+    event.stopPropagation();
+    for (let key in updatedData) {
+      if (updatedData[key].trim() === "") {
+        isEmpty = true;
+        alert(` Error One Of Field Is Empty :( `);
+      }
+    }
+
+    if (!isEmpty) {
+      updateHandler(id, updatedData);
+      setEditableData(null);
+    }
   };
 
   useEffect(() => {
@@ -105,6 +114,9 @@ function Row({
             value={updatedData.name}
             className={styles.inputField}
             onChange={inputChangeHandler}
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
           />
         ) : (
           <>
@@ -124,6 +136,9 @@ function Row({
             name="email"
             value={updatedData.email}
             onChange={inputChangeHandler}
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
             className={styles.inputField}
             required
           />
@@ -141,6 +156,9 @@ function Row({
             value={updatedData.role}
             className={styles.inputField}
             onChange={inputChangeHandler}
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
           />
         ) : (
           <span style={{ backgroundColor: color }} className={styles.badge}>

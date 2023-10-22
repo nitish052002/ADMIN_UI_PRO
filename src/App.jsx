@@ -82,12 +82,16 @@ function App() {
 
 
   */
-  const updateHandler = (id, user) => {     
-    const index = userData.findIndex((user) => user.id === id);
+  const updateHandler = (id, user) => {
+    const IDX_USER__DATA = userData.findIndex((user) => user.id === id);
     const updatedUserData = [...userData];
-    updatedUserData.splice(index, 1, user);
+    updatedUserData.splice(IDX_USER__DATA, 1, user);
     setUserData(updatedUserData);
-    setFiteredData(updatedUserData);
+
+    const IDX_FILTER__DATA = filteredData.findIndex((user) => user.id === id);
+    const updatedFilterData = [...filteredData];
+    updatedFilterData.splice(IDX_FILTER__DATA, 1, user);
+    setFiteredData(updatedFilterData);
   };
 
   /*
@@ -165,12 +169,11 @@ function App() {
     function to delete the user from the list
     * @param {number} id - id of the that user
     */
-  const deleteHandler = (id,event) => {
-    event.stopPropagation()
+  const deleteHandler = (id, event) => {
+    event.stopPropagation();
     const deleteUser = filteredData.filter((user) => user.id !== id);
     setUserData(deleteUser);
-    setFiteredData(deleteUser);
-    // console.log(deleteUser);
+    setFiteredData(deleteUser);  
   };
 
   /*
