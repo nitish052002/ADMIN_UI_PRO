@@ -94,6 +94,12 @@ function App() {
     setFiteredData(updatedFilterData);
   };
 
+
+
+
+
+
+
   /*
    This function   will update the propert {isChecked} of the  
    that user whenever we click on the checkbox
@@ -120,12 +126,22 @@ function App() {
     }
   };
 
-  let isAllChecked = userData.every((user) => user.isChecked === true);
-  let isFewChecked = userData.some((user) => user.isChecked === true);
 
+
+
+
+
+
+
+
+
+
+  
   /*
   Function to select all or deselect  all the users on the currentpage   
   */
+ let isFewChecked = userData.some((user) => user.isChecked === true);
+ let isAllChecked = userData.every((user) => user.isChecked === true);
 
   const onSelectAll = () => {
     let data = userData.map((user) => {
@@ -173,8 +189,14 @@ function App() {
     event.stopPropagation();
     const deleteUser = filteredData.filter((user) => user.id !== id);
     setUserData(deleteUser);
-    setFiteredData(deleteUser);  
+    setFiteredData(deleteUser);
   };
+
+
+
+
+
+
 
   /*
     function to update the current page number
@@ -195,12 +217,22 @@ function App() {
     currentPage !== 1 && setCurrentPage(currentPage - 1);
   }
 
+
+
+
+
+
+
   //  updating deletable data when user will switch to another page
   useEffect(() => {
     if (checkedAll) {
       setDeletAbleData(dataPerPage);
     }
   }, [currentPage]);
+
+
+
+
 
   //  updating deletable data when userData will Be Update
   useEffect(() => {
